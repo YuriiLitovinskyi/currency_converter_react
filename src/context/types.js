@@ -1,0 +1,2 @@
+export const GET_ALL_EXCH_CUR = 'GET_ALL_EXCH_CUR';
+export const GET_ONE_EXCH_CUR = 'GET_ONE_EXCH_CUR';

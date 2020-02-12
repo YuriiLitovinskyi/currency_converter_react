@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CurrencyContext from './context/exch_currency/currencyContext';
 
-function CurrencyRow({ currencyOptions, selectedCurrency, onChangeCurrency, amount, onChangeAmount }) {
+const CurrencyRow = ({ currencyOptions, selectedCurrency, onChangeCurrency, amount, onChangeAmount }) => {
+
+    const currencyContext = useContext(CurrencyContext);
+
+   // const { currencyOptions, selectedCurrency, amount } = currencyContext;
+
     return (
         <div>
             <input type="number" className="input" value={amount || 0} onChange={onChangeAmount} /> 
