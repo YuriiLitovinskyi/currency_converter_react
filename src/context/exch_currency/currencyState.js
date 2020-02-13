@@ -29,7 +29,9 @@ const loadAllCurrency = async () => {
     dispatch({
         type: GET_ALL_EXCH_CUR,
         payload: data
-    })
+    });
+
+    return data;
 };
 
 const loadOneCurrency = async (fromCurrency, toCurrency) => {
@@ -45,6 +47,7 @@ const loadOneCurrency = async (fromCurrency, toCurrency) => {
 
 return <CurrencyContext.Provider
             value={{
+                allCurrency: state.allCurrency,
                 currencyOptions: state.currencyOptions,
                 fromCurrency: state.fromCurrency,
                 toCurrency: state.toCurrency,

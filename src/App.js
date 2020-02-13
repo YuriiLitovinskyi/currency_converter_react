@@ -10,14 +10,15 @@ const App = () => {
 
   const currencyContext = useContext(CurrencyContext);
 
-  const { currencyOptions,
+  const { allCurrency,
+          currencyOptions,
           //fromCurrency,
           //toCurrency,
           exchangeRate,
          // amount,
          // amountInFromCurrency, 
           loadAllCurrency, 
-          loadOneCurrency} = currencyContext;
+          loadOneCurrency} = currencyContext;        
 
   // const [currencyOptions, setCurrencyOptions] = useState([]);
    const [fromCurrency, setFromCurrency] = useState();
@@ -27,6 +28,7 @@ const App = () => {
    const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
   // console.log(currencyOptions);
   // console.log(exchangeRate);
+  console.log(fromCurrency);
 
   let toAmount, fromAmount
   if (amountInFromCurrency) {
@@ -38,7 +40,17 @@ const App = () => {
   }
 
   useEffect(() => {
-    loadAllCurrency();
+    loadAllCurrency()
+      .then(() => {
+        if (allCurrency !== undefined && allCurrency !== null) {
+          setFromCurrency(allCurrency.base);
+          //setToCurrency(Object.keys(allCurrency.rates)[0]);
+        }
+      })
+    //if (allCurrency) {
+      //setFromCurrency(allCurrency.base);
+      //setToCurrency(Object.keys(allCurrency.rates)[0]);
+   // }    
     //eslint-disable-next-line 
   }, []);
 
@@ -81,7 +93,7 @@ const App = () => {
         <CurrencyRow 
           currencyOptions={currencyOptions} 
           selectedCurrency={fromCurrency}
-          onChangeCurrency={e => setFromCurrency(e.target.value) || ''}
+          onChangeCurrency={e => setFromCurrency(e.target.value) }
           amount={fromAmount}
           onChangeAmount={handleFromAmountChange}
         />
@@ -89,7 +101,7 @@ const App = () => {
         <CurrencyRow 
           currencyOptions={currencyOptions}
           selectedCurrency={toCurrency}
-          onChangeCurrency={e => setToCurrency(e.target.value) || ''}
+          onChangeCurrency={e => setToCurrency(e.target.value) }
           amount={toAmount}
           onChangeAmount={handleToAmountChange}
         />     
